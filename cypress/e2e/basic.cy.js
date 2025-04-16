@@ -6,13 +6,12 @@ describe('Basics', ()=>{
     it.only('visitar pagina e validar o titulo',()=>{
         cy.visit('https://wcaquino.me/cypress/componentes.html')
 
-        cy.pause()
         cy.title().should('be.equal', 'Campo de Treinamento')
         .and('contain', 'Campo de Treinamento')
 
-        // Variavel
-        // cy.title().should('be.equal', 'Campo de Treinamento')
-        // .should('contain', 'Campo de Treinamento')
+        cy.title().then(title=>{
+            console.log(title)
+        })
     })
 
     it('Localizar elemento e interagir', ()=>{

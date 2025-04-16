@@ -21,7 +21,7 @@ describe("Elementos", () => {
     cy.get("#resultado").should("have.text", "Voltou!");
   });
 
-  it.only("TexfFields", () => {
+  it("TexfFields", () => {
     cy.get("#formNome").type("teste");
     cy.get("#formNome").should("have.value", "teste");
 
@@ -29,16 +29,44 @@ describe("Elementos", () => {
       .type("text area")
       .should("have.value", "text area");
 
-    cy.get("#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6)")
-      .type("teste")
+    cy.get(
+      "#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6)"
+    ).type("teste");
     //   .should("have.value", "teste");
 
-    cy.get('[data-cy="dataSobrenome"]').type('teste12345{backspace}{backspace}')
-
+    cy.get('[data-cy="dataSobrenome"]').type(
+      "teste12345{backspace}{backspace}"
+    );
 
     cy.get("#elementosForm\\:sugestoes")
-    .clear()
-    .type('erro{selectall}acerto')
-    .should('have.value','acerto')
+      .clear()
+      .type("erro{selectall}acerto")
+      .should("have.value", "acerto");
   });
+
+  it("radioButtom", () => {
+    cy.get("#formSexoFem").click();
+    cy.get("#formSexoFem").should("be.checked");
+    cy.get("#formSexoMasc").should("be.not.checked");
+  });
+
+  it('Checkbox', ()=>{
+    cy.get('#formComidaPizza').click()
+    .should('be.checked')
+
+    cy.get('[name=formComidaFavorita]').click({multiple:true})
+  })
+
+
+  it('combo', ()=>{
+    cy.get('[data-test="dataEscolaridade"]').select('1grauincomp')
+    cy.get('[data-test="dataEscolaridade"]').should('have.value', '1grauincomp')
+    
+
+  })
+
+  it.only('Combo multiplo', ()=>{
+    cy.get('[data-testid="dataEsportes"]').select(['natacao', 'Corrida'])
+
+  })
 });
